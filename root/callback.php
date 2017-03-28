@@ -20,8 +20,8 @@ use LINE\LINEBot\Event\MessageEvent\VideoMessage;
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
-define("LINE_MESSAGING_API_CHANNEL_SECRET", '7ce26fb54a53c4d258e855b7f49d0c37');
-define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'WGI2sHZrfhY94b4HurfkPmIINGpRw47EqBz3iJHOXtnloBAnZPlo6X293XM1RIUYuGMZJFWzCTXQkUvtDs7WKh7CbmbICOcOmp4m+ets5UMbOHPDerVwO+dlTagr7EaWQRTxuzM4z/dj1+z6jSwfWgdB04t89/1O/w1cDnyilFU=ISSUE');
+define("LINE_MESSAGING_API_CHANNEL_SECRET", 'a6b4b1a80d9f25eb0a719fc92cef7d86');
+define("LINE_MESSAGING_API_CHANNEL_TOKEN", '3/cEBpOR0mjAMUtnHKrSrx3N6FnMVNPYfXBIwMO6HNGaljxuxTxZz2fGrmZYFwqfV3dvAWMa7FEGrmOONfbZ7or1wxYgpjbtFMS0Mkk+RftjvYSrUpThxAHGiivf2M662z2zM5P8BSKby0dJiBG3GQdB04t89/1O/w1cDnyilFU=');
 
 require __DIR__."/../vendor/autoload.php";
 require __DIR__."/func.php";
@@ -33,8 +33,8 @@ $bot = new \LINE\LINEBot(
 
 //エラー処理
 if(!isset($_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE])){
-    error_log("エラーです");
-    responseBadRequest("誤ったリクエストです");
+    error_log("kesalahan adalah");
+    responseBadRequest("Permintaan salah");
 }
 
 function responseBadRequest($reason){
@@ -55,15 +55,15 @@ foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
         if (preg_match('/^beams$/i', $text)) {
-            $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text."だね？？");
-            $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("どんな服が売ってるのかな？？");
+            $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text."Tampak? ?");
+            $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Apakah apa jenis pakaian yang Anda jual? ?");
             $muiti_builder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
             $muiti_builder->add($fashion_text);
             $muiti_builder->add($shop_text);
             $bot->replyMessage($reply_token,$muiti_builder);
-        }elseif (preg_match('/服/',$text)) {
-            $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text."なのか");
-            $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("そのお店の写真を送ってよ！！");
+        }elseif (preg_match('/pakaian/',$text)) {
+            $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text."Atau seperti");
+            $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Kirim foto dari toko! !");
             $muiti_builder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
             $muiti_builder->add($fashion_text);
             $muiti_builder->add($shop_text);
@@ -96,14 +96,14 @@ foreach ($events as $event) {
 //
 //        $sticker_builder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder($package_id,$sticker_id);
 
-        $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ありがとう！！またよろしくね！！");
+        $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Terima kasih banyak! ! Lihat Anda Salam! !");
         $muiti_builder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
         //確認ボタン
         // yes とは no はpostbackに格納されるデータ
-        $yes_btn = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("はい","yes");
-        $no_btn = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("いいえ","no");
-        $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("また記事を書きますか？",[$yes_btn,$no_btn]);
-        $confirm_msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("今日の記事",$confirm);
+        $yes_btn = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("ya","yes");
+        $no_btn = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("tidak","no");
+        $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("Apakah Anda menulis artikel?",[$yes_btn,$no_btn]);
+        $confirm_msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Artikel hari ini",$confirm);
         $muiti_builder->add($fashion_text);
         $muiti_builder->add($confirm_msg);
 
@@ -137,7 +137,7 @@ foreach ($events as $event) {
     }elseif($event instanceof LocationMessage){
         $reply_token = $event->getReplyToken();
         $title =  "my location";
-        $address =  "〒150-0002 東京都渋谷区渋谷２丁目２１−１";
+        $address =  "〒150-0002 Tokyo, Shibuya-ku, Shibuya 2-chome, 21-1";
         $latitude = 35.65910807942215;
         $longitude = 139.70372892916203;
         $location_builder = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder($title,$address,$latitude,$longitude);
@@ -164,8 +164,8 @@ foreach ($events as $event) {
 
 
         $reply_token = $event->getReplyToken();
-        $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("しゃしん送ってくれてありがとう！！");
-        $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("最後に今の気持ちをスタンプで表して！！");
+        $fashion_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Foto dikirim Terima kasih !!");
+        $shop_text = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Akhirnya, itu merupakan saat perasaan di cap! !");
         $muiti_builder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
         $muiti_builder->add($fashion_text);
         $muiti_builder->add($shop_text);
@@ -209,9 +209,9 @@ foreach ($events as $event) {
         error_log("8P BOT FOLLOWED: {$event->getUserId()}: {$profile_data['displayName']}");
         $reply_token = $event->getReplyToken();
 
-        $text_builder1 = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("友達追加してくれてありがとう！！".$profile_data['pictureUrl']);
-        $text_builder2 = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("ぺっぴだよ~~。みんなに日々の日常や出来事をまとめて教えて欲しいんだ！！");
-        $text_builder3  = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("今欲しいまとめはこちら");
+        $text_builder1 = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("Terima kasih untuk menambah teman! !".$profile_data['pictureUrl']);
+        $text_builder2 = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("Peppidayo ~ ~. Aku ingin kau mengatakan bersama-sama sehari-hari dan acara untuk semua orang! !");
+        $text_builder3  = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("Sekarang kita ingin dirangkum di sini");
 
         $image_builder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://line-bot0202.herokuapp.com/img/peppi.jpeg","https://line-bot0202.herokuapp.com/img/peppi.jpeg");
 
@@ -235,8 +235,8 @@ foreach ($events as $event) {
         ];
 
         foreach ($items as $item) {
-            $message_builder = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("詳細を見る","detail");
-            $postback_builder = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("このまとめを書く","fashion");
+            $message_builder = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("Lihat rincian","detail");
+            $postback_builder = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Menulis ringkasan ini","fashion");
 
 
             //カルーセルのカラムを作成する
@@ -250,7 +250,7 @@ foreach ($events as $event) {
         }
 
         $carouselbuilder = new LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-        $templatemessagebuilder = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("代わりのテキスト",$carouselbuilder);
+        $templatemessagebuilder = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Bukan teks",$carouselbuilder);
 
         $muiti_builder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
         $muiti_builder->add($text_builder1);
